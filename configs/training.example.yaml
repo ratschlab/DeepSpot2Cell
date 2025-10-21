@@ -1,0 +1,53 @@
+experiment:
+  name: ds2c_baseline
+  random_seed: 2024
+
+data:
+  data_folder: /absolute/path/to/data_root
+  dataset_variant: _v1
+  model_name: phikonv2
+  
+  train_ids:
+    - SAMPLE_ID_1
+    - SAMPLE_ID_2
+  val_ids:
+    - SAMPLE_ID_VAL
+  
+  normalize: true
+  standard_scaling: false
+  minmax: false
+  norm_counts: 10000
+  neighb_degree: 1
+  load_cell_types: false
+  scellst: false
+
+dataloader:
+  batch_size: 4
+  num_workers: 4
+
+model:
+  lr: 1.0e-4
+  weight_decay: 1.0e-6
+  dropout: 0.3
+  n_ensemble: 8
+  phi2rho_size: 512
+  cell_gt_available: true
+  # p_phi: 0.3
+  # p_rho: 0.3
+  # n_ensemble_phi: 8
+  # n_ensemble_rho: 8
+
+trainer:
+  max_epochs: 50
+  accelerator: auto
+  devices: 1
+  precision: 32
+  gradient_clip_val: null
+  log_every_n_steps: 50
+  
+  early_stopping:
+    enabled: true
+    monitor: val_loss
+    patience: 5
+    mode: min
+    min_delta: 0.001

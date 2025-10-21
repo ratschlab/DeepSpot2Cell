@@ -1,0 +1,26 @@
+data:
+  data_folder: /absolute/path/to/hest_data
+  dataset_variant: _v1
+  model_name: phikonv2
+  model_path: /absolute/path/to/phikonv2
+  
+  # Use either pixel-based or micron-based dimensions
+  spot_diameter_px: 160
+  patch_size_px: 224
+  # spot_diameter: 55.0
+  # patch_size: 110.0
+  
+  qv_thr: 20
+  
+  lung:
+    ordered_genes_file: lung_ordered_genes.json
+    train:
+      dataset_ids:
+        - SAMPLE_ID_1
+        - SAMPLE_ID_2
+    ood:
+      dataset_ids: []
+
+processing:
+  gpu_batch_size: 32
+  cpu_batch_size: 8

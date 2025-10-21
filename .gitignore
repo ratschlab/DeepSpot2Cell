@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+*.so
+*.zip
+.DS_Store
+runs/
+outputs/
+env/
+.venv/

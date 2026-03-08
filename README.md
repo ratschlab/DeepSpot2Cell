@@ -62,6 +62,11 @@ Please adjust the paths in your config files accordingly.
 
 *This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/) and [OpenCitations](https://opencitations.net/) APIs.*
 
+## Related Projects
+
+- [DeepSpot](https://github.com/ratschlab/DeepSpot) — Predicts spatial transcriptomics from H&E images at spot-level (Visium) and single-cell (Xenium) resolution. Includes 8 TB of predicted TCGA data.
+- [AESTETIK](https://github.com/ratschlab/aestetik) — AutoEncoder for learning multi-modal spatial transcriptomics representations.
+
 ## Citation
 
 If you found our work useful, please cite:

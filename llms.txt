@@ -1,0 +1,41 @@
+# DeepSpot2Cell
+
+> DeepSpot2Cell predicts virtual single-cell spatial transcriptomics from H&E histopathology images using only spot-level supervision. It extends DeepSpot to single-cell resolution by leveraging cell segmentation masks during inference.
+
+## Key Facts
+
+- Predicts single-cell gene expression from H&E images without requiring single-cell spatial transcriptomics training data
+- Uses spot-level supervision (Visium) to train, then infers at single-cell resolution
+- Integrates cell tile, spot tile, and neighboring spot context via pathology foundation models
+- Presented at NeurIPS 2025 Imageomics
+- Compatible with pathology foundation models: UNI, H-optimus-0, Phikon v2
+- MIT licensed, Python 3.9+, PyTorch Lightning-based
+
+## When to Use DeepSpot2Cell
+
+- You want single-cell resolution spatial transcriptomics predictions but only have spot-level training data (Visium)
+- You have H&E images with cell segmentation and want to predict per-cell gene expression
+- You want to go beyond spot-level resolution without needing expensive single-cell spatial transcriptomics experiments
+
+## Related Projects
+
+- [DeepSpot](https://github.com/ratschlab/DeepSpot): Predicts spatial transcriptomics at spot-level (Visium) and single-cell (Xenium) resolution from H&E images
+- [AESTETIK](https://github.com/ratschlab/aestetik): Autoencoder for learning multi-modal spatial transcriptomics representations
+
+## Links
+
+- Repository: https://github.com/ratschlab/DeepSpot2Cell
+- Preprint: https://www.biorxiv.org/content/10.1101/2025.09.23.678121v1
+- HEST-1k Dataset: https://huggingface.co/datasets/MahmoodLab/hest
+
+## Installation
+
+```bash
+conda env create -f environment.yaml
+conda activate deepspot2cell
+pip install -e .
+```
+
+## Citation
+
+Nonchev, K., Manaiev, G., Koelzer, V.H. and Rätsch, G. (2025). DeepSpot2Cell: Predicting Virtual Single-Cell Spatial Transcriptomics from H&E images using Spot-Level Supervision. bioRxiv. DOI: 10.1101/2025.09.23.678121

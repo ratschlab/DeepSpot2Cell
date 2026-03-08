@@ -50,6 +50,14 @@ The HEST-1k dataset and its documentation can be found [here](https://huggingfac
 
 Please adjust the paths in your config files accordingly.
 
+## Papers Citing DeepSpot2Cell
+
+<!-- CITATIONS:START -->
+1. Ninghui Hao, Xinxin Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models.." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
+<!-- CITATIONS:END -->
+
+*This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/) and [OpenCitations](https://opencitations.net/) APIs.*
+
 ## Citation
 
 If you found our work useful, please cite:

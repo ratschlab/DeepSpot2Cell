@@ -1,0 +1,50 @@
+cff-version: 1.2.0
+title: "DeepSpot2Cell: Predicting Virtual Single-Cell Spatial Transcriptomics from H&E images using Spot-Level Supervision"
+message: "If you use DeepSpot2Cell, please cite it using the metadata from this file."
+type: software
+authors:
+  - given-names: Kalin
+    family-names: Nonchev
+  - given-names: Glib
+    family-names: Manaiev
+  - given-names: Viktor H.
+    family-names: Koelzer
+  - given-names: Gunnar
+    family-names: Rätsch
+repository-code: https://github.com/ratschlab/DeepSpot2Cell
+url: https://www.biorxiv.org/content/10.1101/2025.09.23.678121v1
+license: MIT
+version: 0.1.0
+date-released: "2025-09-23"
+keywords:
+  - spatial-transcriptomics
+  - deep-learning
+  - computational-pathology
+  - digital-pathology
+  - gene-expression-prediction
+  - histopathology
+  - single-cell
+  - foundation-models
+  - pytorch
+  - spatial-biology
+  - cell-segmentation
+identifiers:
+  - type: doi
+    value: 10.1101/2025.09.23.678121
+    description: bioRxiv preprint
+preferred-citation:
+  type: article
+  title: "DeepSpot2Cell: Predicting Virtual Single-Cell Spatial Transcriptomics from H&E images using Spot-Level Supervision"
+  authors:
+    - given-names: Kalin
+      family-names: Nonchev
+    - given-names: Glib
+      family-names: Manaiev
+    - given-names: Viktor H.
+      family-names: Koelzer
+    - given-names: Gunnar
+      family-names: Rätsch
+  doi: 10.1101/2025.09.23.678121
+  url: https://www.biorxiv.org/content/10.1101/2025.09.23.678121v1
+  journal: bioRxiv
+  year: 2025

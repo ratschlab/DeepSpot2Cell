@@ -5,10 +5,36 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "deepspot2cell"
 version = "0.1.0"
-description = "DeepSpot2Cell: virtual single-cell spatial transcriptomics from H&E images"
-authors = [{ name = "DeepSpot2Cell Contributors" }]
+description = "DeepSpot2Cell: Predicting virtual single-cell spatial transcriptomics from H&E histopathology images using spot-level supervision"
+authors = [{ name = "Kalin Nonchev" }, { name = "Glib Manaiev" }]
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.9"
+keywords = [
+    "spatial-transcriptomics",
+    "deep-learning",
+    "computational-pathology",
+    "digital-pathology",
+    "gene-expression",
+    "histopathology",
+    "single-cell",
+    "foundation-models",
+    "pytorch",
+    "spatial-biology",
+    "cell-segmentation",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
 dependencies = [
     "torch>=2.2.0",
     "torchvision>=0.17.0",
@@ -42,6 +68,12 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["black", "isort", "nbstripout"]
+
+[project.urls]
+Homepage = "https://github.com/ratschlab/DeepSpot2Cell"
+Repository = "https://github.com/ratschlab/DeepSpot2Cell"
+"Bug Tracker" = "https://github.com/ratschlab/DeepSpot2Cell/issues"
+"Preprint" = "https://www.biorxiv.org/content/10.1101/2025.09.23.678121v1"
 
 [tool.setuptools.packages.find]
 include = ["deepspot2cell", "deepspot2cell.*"]

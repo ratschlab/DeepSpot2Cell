@@ -1,5 +1,9 @@
 # DeepSpot2Cell: Predicting Virtual Single-Cell Spatial Transcriptomics from H&E images using Spot-Level Supervision
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![bioRxiv](https://img.shields.io/badge/bioRxiv-2025.09.23.678121-blue)](https://www.biorxiv.org/content/10.1101/2025.09.23.678121v1)
+
 **Authors**: Kalin Nonchev*, Glib Manaiev*, Viktor Hendrik Koelzer+, Gunnar Rätsch+
 
 The preprint is available [here](https://www.biorxiv.org/content/10.1101/2025.09.23.678121v1).

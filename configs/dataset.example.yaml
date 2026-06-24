@@ -3,15 +3,15 @@ data:
   dataset_variant: _v1
   model_name: phikonv2
   model_path: /absolute/path/to/phikonv2
-  
+
   # Use either pixel-based or micron-based dimensions
   spot_diameter_px: 160
   patch_size_px: 224
   # spot_diameter: 55.0
   # patch_size: 110.0
-  
+
   qv_thr: 20
-  
+
   lung:
     ordered_genes_file: lung_ordered_genes.json
     train:

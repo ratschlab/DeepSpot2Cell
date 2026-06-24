@@ -19,6 +19,42 @@ import yaml
 import json
 from hest import iter_hest
 
+def clean_gene_string(g):
+    s = str(g).strip()
+
+    if (s.startswith("b'") or s.startswith('b"')) and (s.endswith("'") or s.endswith('"')):
+        s = s[2:-1]
+    elif (s.startswith("B'") or s.startswith('B"')) and (s.endswith("'") or s.endswith('"')):
+        s = s[2:-1]
+
+    s = s.upper().replace("GRCH38______", "").replace("GRCH38_", "")
+    return s
+
+def is_artifact(gene_name):
+    g = str(gene_name).upper()
+    prefixes_technical = ["BLANK", "NEGCONTROL", "UNASSIGNED", "DEPRECATED", "ANTISENSE"]
+    prefixes_bio_noise = ["MT-", "MTRNR"]
+    prefixes_ribo = ["RPS", "RPL"]
+
+    all_prefixes = prefixes_technical + prefixes_bio_noise + prefixes_ribo
+
+    return any(g.startswith(p) for p in all_prefixes)
+
+def standardize_gene_names(adata):
+    if 'SYMBOL' in adata.var.columns:
+        adata.var_names = adata.var['SYMBOL'].astype(str)
+    elif 'gene_name' in adata.var.columns:
+        adata.var_names = adata.var['gene_name'].astype(str)
+
+    adata.var_names_make_unique()
+
+    new_names = [clean_gene_string(g) for g in adata.var_names]
+    adata.var_names = new_names
+
+    adata.var_names_make_unique()
+
+    return adata
+
 
 def model_fine_tune(model, dataloader, rho=False, gene_expression=True, max_epochs=10):
     # Freeze all layers in the model
@@ -89,6 +125,30 @@ def plot_loss_values(train_losses, val_losses=None):
     plt.legend()
 
 
+def load_xenium_gene_indices(data_cfg: dict, clean_names: bool = False):
+    """Return (LongTensor of int indices, list of gene names) for xenium genes in the full gene list.
+    Reads the stats CSV produced by generate_hybrid_gene_list.py (in_xenium column).
+    """
+    from pathlib import Path
+    data_folder = Path(data_cfg["data_folder"])
+    json_path = data_folder / data_cfg["ordered_genes_file"]
+    stats_path = data_folder / data_cfg["ordered_genes_file"].replace(".json", "_stats.csv")
+    if not json_path.exists():
+        raise FileNotFoundError(f"Gene list not found: {json_path}")
+    if not stats_path.exists():
+        raise FileNotFoundError(f"Gene stats CSV not found: {stats_path}")
+    with open(json_path) as f:
+        gene_list = json.load(f)
+    if clean_names:
+        gene_list = [clean_gene_string(g) for g in gene_list]
+    df = pd.read_csv(stats_path, index_col=0)
+    xenium_set = set(df[df["in_xenium"] == True].index.tolist())
+    indices = [i for i, g in enumerate(gene_list) if g in xenium_set]
+    names = [gene_list[i] for i in indices]
+    print(f"  Xenium panel (stats CSV): {len(indices):,} / {len(gene_list):,} genes")
+    return torch.tensor(indices, dtype=torch.long), names
+
+
 def fix_seed(seed):
     os.environ['PYTHONHASHSEED'] = str(seed)
     random.seed(seed)
@@ -121,65 +181,65 @@ def order_genes(config):
     all_sample_filtered_genes = []
     all_cell_expressions = []
     gene_to_idx_map = {}
-    
+
     for i, st in enumerate(iter_hest(data_folder, id_list=sample_ids, load_transcripts=True)):
         sample_id = sample_ids[i]
         print(f"    Sample {i+1}/{len(sample_ids)}: {sample_id}")
-        
+
         adata = st.adata
         all_genes.update(adata.var_names)
-        
+
         transcript_df = st.transcript_df
         if transcript_df is None or transcript_df.empty:
             print(f"      No transcript data available. Skipping.")
             all_sample_filtered_genes.append(set())
             continue
-            
+
         print(f"      Filtering transcripts: QV > {qv_min}")
         transcript_df['qv'] = pd.to_numeric(transcript_df['qv'], errors='coerce')
         df_qv_filtered = transcript_df[transcript_df['qv'] > qv_min]
-        
+
         df_cell_filtered = df_qv_filtered[
-            ~df_qv_filtered['cell_id'].isin(['UNASSIGNED', -1]) & 
+            ~df_qv_filtered['cell_id'].isin(['UNASSIGNED', -1]) &
             df_qv_filtered['cell_id'].notna()
         ]
-        
+
         if df_cell_filtered.empty:
             print(f"      No valid transcripts after filtering. Skipping.")
             all_sample_filtered_genes.append(set())
             continue
-            
+
         # Count cells per gene
         gene_cell_counts = df_cell_filtered.groupby('feature_name')['cell_id'].nunique()
         filtered_genes = set(gene_cell_counts[gene_cell_counts >= nc_min].index)
         all_sample_filtered_genes.append(filtered_genes)
-        
+
         print(f"      Found {len(filtered_genes)} genes present in ≥{nc_min} cells with QV>{qv_min}")
-        
+
         for cell_id, cell_data in df_cell_filtered.groupby('cell_id'):
             gene_counts = cell_data.groupby('feature_name').size().to_dict()
             all_cell_expressions.append((gene_counts, sample_id))
-    
+
     if all_sample_filtered_genes:
         quality_filtered_genes = set.intersection(*all_sample_filtered_genes)
         print(f"\n    Found {len(quality_filtered_genes)} genes passing quality filters in ALL samples")
     else:
         quality_filtered_genes = set()
         print("\n    No genes passed quality filters across all samples")
-    
+
     print("    Calculating gene variability...")
     gene_list = sorted(list(quality_filtered_genes))
     gene_to_idx_map = {gene: idx for idx, gene in enumerate(gene_list)}
     expression_matrix = []
-    
+
     for gene_counts, sample_id in all_cell_expressions:
         gene_expression = np.zeros(len(gene_list))
         for gene_name, count in gene_counts.items():
             if gene_name in gene_to_idx_map:
                 gene_expression[gene_to_idx_map[gene_name]] = count
-        
+
         expression_matrix.append(gene_expression)
-    
+
     if not expression_matrix:
         print("    No expression data available after filtering. Cannot order genes.")
         return []
@@ -192,7 +252,7 @@ def order_genes(config):
     idx = combined_adata.var['highly_variable_rank'].argsort()
     combined_adata = combined_adata[:, idx]
     ordered_gene_names = combined_adata.var_names.tolist()
-    
+
     ordered_genes_path = f"{data_folder}/{config['data'][dataset]['ordered_genes_file']}"
     with open(ordered_genes_path, 'w') as f:
         json.dump(ordered_gene_names, f, indent=2)

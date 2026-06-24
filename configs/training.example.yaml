@@ -1,53 +1,206 @@
+# ============================================================
+# DeepSpot2Cell — Training Configuration
+# Run: python scripts/train.py --config configs/training.example.yaml
+# ============================================================
+
 experiment:
-  name: ds2c_baseline
+  name: ds2c_example           # Run name; checkpoints saved to {output_dir}/{name}/
   random_seed: 2024
+  output_dir: ./runs           # Root directory for all run outputs
 
+# ============================================================
+# DATA
+# ============================================================
 data:
-  data_folder: /absolute/path/to/data_root
-  dataset_variant: _v1
+  # Root folder containing all preprocessed data subdirectories:
+  #   {data_folder}/expressions{dataset_variant}/  — H5 expression files
+  #   {data_folder}/embeddings{dataset_variant}/   — .npy patch+cell embedding files
+  data_folder: /path/to/your/data
+
+  # Suffix appended to expressions/ and embeddings/ directory names.
+  # Allows multiple preprocessing variants under the same data_folder.
+  # Example: "_v1_bowel" → expressions_v1_bowel/ and embeddings_v1_bowel/
+  dataset_variant: _v1_example
+
+  # Name of the patch/cell morphology embedding model.
+  # Must match the subdirectory inside embeddings{dataset_variant}/.
+  # Supported: "phikonv2", "hoptimus1", or any model registered in utils_image.py
   model_name: phikonv2
-  
-  train_ids:
-    - SAMPLE_ID_1
-    - SAMPLE_ID_2
-  val_ids:
-    - SAMPLE_ID_VAL
-  
-  normalize: true
-  standard_scaling: false
-  minmax: false
-  norm_counts: 10000
-  neighb_degree: 1
+
+  # Path to local model weights (required for models not on HuggingFace Hub).
+  # Set to null or omit if the model is fetched automatically.
+  model_path: /path/to/phikonv2/weights
+
+  # Path (relative to data_folder) to the hybrid gene list JSON produced by
+  # generate_hybrid_gene_list.py. Required for evaluation_xenium.py; not read
+  # by train.py, but useful to keep in the same config for reproducibility.
+  ordered_genes_file: hybrid_genes_example.json
+
+  # Whether to load cell-type labels from H5 files (only for downstream analysis)
   load_cell_types: false
-  scellst: false
 
+  # ---- Train / Val / Test splits ----
+  # Each split needs:
+  #   type: "visium" (no cell GT) or "xenium" (cell-level GT available)
+  #   ids:  list of HEST sample IDs
+  #   cell_gt_available: false for Visium, true for Xenium
+  #
+  # Training uses Visium (spot-level supervision only).
+  # Validation uses Visium (spot-level loss tracking).
+  # Test uses Xenium (cell-level evaluation in evaluation_xenium.py).
+  split:
+    train:
+      type: visium
+      cell_gt_available: false   # no per-cell ground truth → RAM-efficient loading
+      ids:
+        - SAMPLE_TRAIN_1         # HEST sample ID (e.g. MISC34, TENX91)
+        - SAMPLE_TRAIN_2
+        - SAMPLE_TRAIN_3
+
+    val:
+      type: visium
+      cell_gt_available: false
+      ids:
+        - SAMPLE_VAL_1
+        - SAMPLE_VAL_2
+
+    test:
+      type: xenium
+      cell_gt_available: true    # loads per-cell expression from H5
+      ids:
+        - SAMPLE_TEST_XENIUM_1   # Xenium sample used for evaluation_xenium.py
+
+  # Optional: cap max patches loaded per sample (prevents large samples from
+  # dominating; null = no cap)
+  max_patches_per_sample: null
+
+  # Optional: over/undersample each sample to exactly this many patches per
+  # epoch (null = use all available; useful for balanced multi-tissue training)
+  target_patches_per_sample: null
+
+  # ---- Preprocessing QC thresholds (used by dataset_creation_*.py) ----
+  # These are read during preprocessing, not training, but kept here for
+  # reproducibility.
+  qv_thr: 20                  # Xenium transcript quality-value threshold
+  spot_diameter_px: 160       # Visium spot diameter in pixels at processing resolution
+  patch_size_px: 224          # Patch size in pixels fed to the morphology model
+
+# ============================================================
+# NORMALIZATION
+# ============================================================
+normalization:
+  normalize: true             # Apply CPM normalization + log1p
+  norm_counts: 10000          # CPM target (counts per 10k)
+  standard_scaling: false     # Z-score after log1p (rarely needed)
+  minmax: false               # Min-max scaling after log1p (rarely needed)
+
+# ============================================================
+# DATALOADER
+# ============================================================
 dataloader:
-  batch_size: 4
-  num_workers: 4
+  batch_size: 64              # Spots per batch. Large values (256+) speed up training
+                              # but require proportionally more VRAM.
+  num_workers: 4              # CPU workers for data loading. On SLURM with COW fork
+                              # memory accounting, set to 0 or use prefetch_factor=1.
 
+# ============================================================
+# MODEL
+# ============================================================
 model:
+  # ---- Optimizer ----
   lr: 1.0e-4
   weight_decay: 1.0e-6
-  dropout: 0.3
+
+  # ---- Architecture ----
+  # Number of Phi / Rho ensemble members (median/mean aggregated).
+  # More = smoother predictions, slower training. 8 is a good default.
   n_ensemble: 8
+  # n_ensemble_phi: null      # Override Phi ensemble count independently
+  # n_ensemble_rho: null      # Override Rho ensemble count independently
+
+  # Hidden dimension of Phi and Rho MLPs.
+  # 512 for phikonv2 (emb_dim=768), 2048 for hoptimus1 (emb_dim=1536).
   phi2rho_size: 512
-  cell_gt_available: true
+
+  # Shared dropout applied to all layers (set p_phi/p_rho to override per-module).
+  dropout: 0.3
   # p_phi: 0.3
   # p_rho: 0.3
-  # n_ensemble_phi: 8
-  # n_ensemble_rho: 8
 
+  # Number of neighboring Visium spot patch embeddings to include as context.
+  # 0 = no context, 1 = 6 hex neighbors (recommended).
+  neighb_degree: 1
+
+  # Whether training split has per-cell ground truth (almost always false for Visium).
+  cell_gt_available: false
+
+  # ---- Loss ----
+  # Options: "mse", "pearson_mse", "huber", "pearson_huber"
+  # "pearson_mse" adds a Pearson-correlation penalty term alongside MSE.
+  loss_type: mse
+
+  # Delta for Huber loss variants (ignored for mse/pearson_mse).
+  # huber_delta: 1.0
+
+  # ---- Aggregation ----
+  # How per-cell features are pooled before Rho.
+  # "sum" (default) or "mean".
+  pooling: sum
+
+  # Physically-correct variant: apply Rho per-cell in linear space, sum, then log1p.
+  # Respects transcript additivity. Recommended when predict_then_sum makes sense
+  # for your normalization.
+  predict_then_sum: false
+
+  # ---- Optional modules ----
+  # Multi-head self-attention over cells before aggregation.
+  use_attention: false
+  # attention_heads: 4
+
+  # Learnable spatial positional encoding from (x,y) cell centroids.
+  use_positional_encoding: false
+
+  # LayerNorm on raw embeddings before Phi (helps with hoptimus1 scale variance).
+  input_layer_norm: false
+
+  # LayerNorm after pooling, before Rho.
+  pool_layer_norm: false
+
+  # Context dropout: randomly zeros out neighbor embeddings during training.
+  # Acts as regularization and forces the model to rely less on context.
+  context_dropout: 0.0
+
+  # Auxiliary spot-consistency loss weight (0.0 = disabled).
+  aux_loss_weight: 0.0
+
+  # ---- LR Schedule ----
+  # Linear warmup for warmup_epochs epochs, then cosine decay to cosine_epochs.
+  # Set both to 0 to use constant LR.
+  warmup_epochs: 0
+  cosine_epochs: 0            # Set to expected early-stopping epoch
+  eta_min_factor: 0.01        # final LR = lr * eta_min_factor
+
+# ============================================================
+# TRAINER (PyTorch Lightning)
+# ============================================================
 trainer:
-  max_epochs: 50
-  accelerator: auto
-  devices: 1
-  precision: 32
-  gradient_clip_val: null
+  max_epochs: 100
+  accelerator: auto           # "auto", "gpu", "cpu"
+  devices: 1                  # Number of GPUs (or "auto")
+  precision: 32               # 32 or 16 (mixed precision)
+  accumulate_grad_batches: 1  # Gradient accumulation steps
   log_every_n_steps: 50
-  
+
   early_stopping:
     enabled: true
-    monitor: val_loss
-    patience: 5
-    mode: min
-    min_delta: 0.001
+    monitor: val_loss          # Metric to monitor; also try "val_spot_pearson" (mode: max)
+    patience: 10
+    mode: min                  # "min" for loss, "max" for correlation
+    min_delta: 0.0
+
+# ============================================================
+# PROCESSING (read by dataset_creation_*.py, not train.py)
+# ============================================================
+processing:
+  gpu_batch_size: 64          # Image batch size for embedding extraction on GPU
+  cpu_batch_size: 8           # Fallback batch size when running on CPU

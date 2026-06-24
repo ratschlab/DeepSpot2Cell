@@ -6,25 +6,61 @@ def mse(pred, target):
     return torch.nn.functional.mse_loss(pred, target)
 
 
-def pearsonr(pred, target, eps = 1e-8):
+def pearsonr(pred, target, eps=1e-8):
     y_pred_centered = pred - torch.mean(pred, dim=0)
     y_true_centered = target - torch.mean(target, dim=0)
 
     covariance = torch.sum(y_pred_centered * y_true_centered, dim=0)
-    std_pred = torch.sqrt(torch.sum(y_pred_centered ** 2, dim=0) + eps)
-    std_true = torch.sqrt(torch.sum(y_true_centered ** 2, dim=0) + eps)
+    std_pred = torch.sqrt(torch.sum(y_pred_centered**2, dim=0) + eps)
+    std_true = torch.sqrt(torch.sum(y_true_centered**2, dim=0) + eps)
 
     pearson_corr = covariance / (std_pred * std_true)
     return torch.mean(1 - pearson_corr)
 
 
 def pearson_mse(pred, target):
-    return (pearsonr(pred, target) + mse(pred, target))
+    return pearsonr(pred, target) + mse(pred, target)
+
+
+def huber(pred, target, delta: float = 1.0):
+    return torch.nn.functional.huber_loss(pred, target, delta=delta)
+
+
+def pearson_huber(pred, target, delta: float = 1.0):
+    return pearsonr(pred, target) + huber(pred, target, delta=delta)
+
+
+def spot_consistency_loss(cell_features, rho_fn, mask, spot_true):
+    """
+    Auxiliary loss: per-cell rho outputs, summed, should match spot expression.
+
+    Args:
+        cell_features: [B, C, concat_dim] - concatenated per-cell features (BEFORE sum)
+        rho_fn: the rho ensemble function to apply per-cell
+        mask: [B, C] - valid cell mask (already multiplied by is_inside)
+        spot_true: [B, G] - true spot expression (log-normalized)
+    Returns:
+        scalar loss
+    """
+    b, c, d = cell_features.shape
+
+    # Apply rho to each cell independently: [B*C, d] -> [B*C, G]
+    per_cell_counts = rho_fn(cell_features.view(-1, d))  # [B*C, G]
+    per_cell_counts = per_cell_counts.view(b, c, -1)  # [B, C, G]
+
+    # Mask and sum over cells -> reconstructed spot
+    per_cell_counts = per_cell_counts * mask.unsqueeze(-1)  # zero out padding
+    reconstructed_spot = torch.log1p(per_cell_counts.sum(dim=1))  # [B, G]
+
+    return mse(reconstructed_spot, spot_true)
 
 
 class wmse(torch.nn.Module):
     """MSE with each gene j is weighted by f(rank_j)."""
-    def __init__(self, n_genes, upweight_hvg=True, power=0.1, device=None, dtype=torch.float32):
+
+    def __init__(
+        self, n_genes, upweight_hvg=True, power=0.1, device=None, dtype=torch.float32
+    ):
         super().__init__()
 
         if upweight_hvg:
@@ -38,9 +74,9 @@ class wmse(torch.nn.Module):
     def forward(self, pred, target):
         loss = self.weights * (pred - target) ** 2
         return loss.mean()
-    
 
-def safe_pearson(pred, target, sample_wise = False):
+
+def safe_pearson(pred, target, sample_wise=False):
     """Torch-native Pearson along feature-dim (or sample-wise after transpose)."""
     if sample_wise:
         pred, target = pred.T, target.T

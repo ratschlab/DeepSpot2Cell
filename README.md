@@ -73,12 +73,13 @@ Please adjust the paths in your config files accordingly.
 If you found our work useful, please cite:
 
 ```bibtex
-@article{Nonchev2025.09.23.678121,
-    author = {Nonchev, Kalin and Manaiev, Glib and Koelzer, Viktor H and Rätsch, Gunnar},
-    title = {DeepSpot2Cell: Predicting Virtual Single-Cell Spatial Transcriptomics from H\&E images using Spot-Level Supervision},
-    year = {2025},
-    doi = {10.1101/2025.09.23.678121},
-    journal = {bioRxiv}
+@article{nonchev2025deepspot2cell,
+  title={DeepSpot2Cell: Predicting Virtual Single-Cell Spatial Transcriptomics from H\&E images using Spot-Level Supervision},
+  author={Nonchev, Kalin and Manaiev, Glib and Koelzer, Viktor H and R{\"a}tsch, Gunnar},
+  journal={bioRxiv},
+  pages={2025--09},
+  year={2025},
+  publisher={Cold Spring Harbor Laboratory}
 }
 ```
 

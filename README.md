@@ -58,7 +58,8 @@ Please adjust the paths in your config files accordingly.
 ## Papers Citing DeepSpot2Cell
 
 <!-- CITATIONS:START -->
-1. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
+1. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered computational evolution of spatial omics: integration, mapping, and foundation models." *Briefings in Bioinformatics* (2026). [DOI](https://doi.org/10.1093/bib/bbag387)
+2. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
 <!-- CITATIONS:END -->
 
 *This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/) and [OpenCitations](https://opencitations.net/) APIs.*

@@ -13,6 +13,8 @@ The preprint is available [here](https://www.biorxiv.org/content/10.1101/2025.09
 **DeepSpot2Cell predicts virtual single-cell spatial transcriptomics as follows:** (1) During training, the model takes as input (i) the cropped cell tile defined by the segmentation mask, (ii) the full spot tile covering containing the cell (55μm), and (iii) the neighboring spot tile(s). All tiles are first processed through a pathology foundation model (PFM) before being used to train the model to regress spot-level gene expression; (2) During inference, the model takes as input only the cell tile of interest along with (ii) and (iii), again after PFM processing and predicts the virtual transcriptomic profile at the cell level.
 
 ## News
+
+  - [09.2026] Introducing [Aurora](https://www.auroraomics.org) - a no-code platform for virtual spatial transcriptomics from H&E images. Aurora makes virtual spatial transcriptomics accessible without requiring users to have their own GPUs, with a fully automated workflow designed to ensure that spatial transcriptomics predictions are performed correctly. Try the interactive [Aurora demo](https://www.auroraomics.org/demo).
 - [06.2026] Meet the next generation of DeepSpot: [DeepSpot-M: a multimodal foundation model for transcriptome-wide virtual spatial transcriptomics from histology](https://www.medrxiv.org/content/10.64898/2026.06.19.26356060v1). [Code.](https://github.com/ratschlab/DeepSpotM)
 - [01.2026] Invited talk at 10x Genomics Single Cell & Spatial Discovery Symposium, Boris Laukas, 2026, Bern, Switzerland
 - [12.2025] Contributed talk at [NeurIPS 2025 Workshop on Multi-modal Foundation Models and Large Language Models for Life Sciences](https://nips2025fm4ls.github.io/), 2025, San Diego, USA

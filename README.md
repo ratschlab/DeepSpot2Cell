@@ -60,8 +60,10 @@ Please adjust the paths in your config files accordingly.
 ## Papers Citing DeepSpot2Cell
 
 <!-- CITATIONS:START -->
-1. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered computational evolution of spatial omics: integration, mapping, and foundation models." *Briefings in Bioinformatics* (2026). [DOI](https://doi.org/10.1093/bib/bbag387)
-2. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
+1. Xin Luo, Yicheng Tao, Haoxuan Zeng, Suyuan Wang, Chenzi Ouyang, Meiqing Zhu, Kai Liu, Shuibing Chen, and Jie Liu "VOICE: A Vision-Omics Foundation Model Integrating Direct and Retrieval-Based Prediction of In-situ Single-Cell Gene Expression." (2026). [DOI](https://www.semanticscholar.org/paper/1a9de6a70d3686b2eded4dce42b1271063fe525c)
+2. Hyun-jong Jang, Kwangil Yim, and Sung Hak Lee "Artificial Intelligence for Molecular Biomarker Identification in Gastrointestinal and Hepatobiliary Cancers." *International Journal of Molecular Sciences* (2026). [DOI](https://doi.org/10.3390/ijms27156969)
+3. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered computational evolution of spatial omics: integration, mapping, and foundation models." *Briefings in Bioinformatics* (2026). [DOI](https://doi.org/10.1093/bib/bbag387)
+4. Ninghui Hao, Xinxing Yang, Boshen Yan, Dong Li, Junzhou Huang, Xintao Wu, E. S. Ruiz, Arlene Ruiz de Luzuriaga, Chen Zhao, and Guihong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
 <!-- CITATIONS:END -->
 
 *This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/) and [OpenCitations](https://opencitations.net/) APIs.*

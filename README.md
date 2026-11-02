@@ -60,7 +60,14 @@ Please adjust the paths in your config files accordingly.
 ## Papers Citing DeepSpot2Cell
 
 <!-- CITATIONS:START -->
-No citations found yet. Check back soon!
+1. Thomas Batique, Kalin Nonchev, V. Koelzer, and G. Rätsch "Probabilistic uncertainty in virtual spatial transcriptomics from histology is largely redundant with the predicted mean." *bioRxiv* (2026). [DOI](https://doi.org/10.64898/2026.10.23.760875)
+2. Zi-Jun Gao, Chun-Bin Gu, Jin-Xi Xiang, Xiang-De Luo, and Pheng-Ann Heng "Towards Scalable Context-Aware Single-Cell Spatial Transcriptomics Prediction from Histology Images." (2026). [DOI](https://www.semanticscholar.org/paper/239f821d9ddcdcff16171ec7f9c517eff9d0b849)
+3. Li-Ying Chen, Zhong-Min Zhang, B. Wang, Wen-Le Ren, Hong-Ke Peng, Shi-Hong Lu, Meng-Yuan Xu, Yun-He Zhou, Xiong-Jian Luo, Tong Ye, Qi Zhu, Feng Yan, and Lu-Yi Tian "MINT infers the latent single-cell spatial transcriptome from paired histology." *bioRxiv* (2026). [DOI](https://doi.org/10.64898/2026.09.16.751717)
+4. Xin Luo, Yi-Cheng Tao, Hao-Xuan Zeng, Su-Yuan Wang, Chen-Zi Ouyang, Meiqing Zhu, Kai Liu, Shui-Bing Chen, and Jie Liu "VOICE: A Vision-Omics Foundation Model Integrating Direct and Retrieval-Based Prediction of In-situ Single-Cell Gene Expression." (2026). [DOI](https://www.semanticscholar.org/paper/1a9de6a70d3686b2eded4dce42b1271063fe525c)
+5. Ning-Hui Hao, Bo-Shen Yan, Dong Li, Xin-Tao Wu, Chen Zhao, and Gui-Hong Wan "AI for Precision Medicine: Histopathology-centered Computational Analysis of Spatial Omics: Integration, Mapping, and Foundation Models." *Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2* (2026). [DOI](https://doi.org/10.1145/3770855.3816454)
+6. Hyun-jong Jang, Kwangil Yim, and Sung-Hak Lee "Artificial Intelligence for Molecular Biomarker Identification in Gastrointestinal and Hepatobiliary Cancers." *International Journal of Molecular Sciences* (2026). [DOI](https://doi.org/10.3390/ijms27156969)
+7. Ning-Hui Hao, Xin-Xing Yang, Bo-Shen Yan, Dong Li, Jun-Zhou Huang, Xin-Tao Wu, E. S. Ruiz, Arlene M. Ruiz de Luzuriaga, Chen Zhao, and Gui-Hong Wan "Histopathology-centered computational evolution of spatial omics: integration, mapping, and foundation models." *Briefings in Bioinformatics* (2026). [DOI](https://doi.org/10.1093/bib/bbag387)
+8. Ning-Hui Hao, Xinxing Yang, Bo-Shen Yan, Dong Li, Jun-Zhou Huang, Xin-Tao Wu, E. S. Ruiz, A. R. D. de Luzuriaga, Chen Zhao, and Gui-Hong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
 <!-- CITATIONS:END -->
 
 *This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/) and [OpenCitations](https://opencitations.net/) APIs.*

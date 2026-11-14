@@ -62,7 +62,7 @@ Please adjust the paths in your config files accordingly.
 <!-- CITATIONS:START -->
 1. Xi Li, Ya-Qi Hu, Zi-Heng Duan, Chao-Yang Wang, and Jing Zhang "STMoE: Multi-Scale Mixture-of-Experts for Single-Cell Gene Expression Prediction from Histology." *Proceedings of the 35th ACM International Conference on Information and Knowledge Management* (2026). [DOI](https://doi.org/10.1145/3799682.3841080)
 2. Zi-Jun Gao, Yi-Jiang Chen, Xiang-De Luo, and Pheng-Ann Heng "CellPlex: Benchmarking Single-Cell Spatial Proteomics Prediction from H&E." (2026). [DOI](https://www.semanticscholar.org/paper/920a40bf247e53248537f1c704490a4ca9b01482)
-3. Miguel Andrade, José A. Almeida, Carlos Santiago, and Catarina Barata "From WSIs to Bulk, Spatial and Single-Cell Transcriptomics via Multi-Scale Graph Neural Networks." (2026). [DOI](https://www.semanticscholar.org/paper/db352cfe46085699025e23f0def3588f8d70def8)
+3. Miguel Andrade, José A. Almeida, Carlos Santiago, and Catarina Barata "From WSIs to Bulk, Spatial and Single-Cell Transcriptomics via Multi-Scale Graph Neural Networks." *arXiv* (2026). [DOI](https://doi.org/10.48550/arxiv.2610.41692)
 4. Thomas Batique, Kalin Nonchev, V. Koelzer, and G. Rätsch "Probabilistic uncertainty in virtual spatial transcriptomics from histology is largely redundant with the predicted mean." *bioRxiv* (2026). [DOI](https://doi.org/10.64898/2026.10.23.760875)
 5. Zi-Jun Gao, Chun-Bin Gu, Jin-Xi Xiang, Xiang-De Luo, and Pheng-Ann Heng "Towards Scalable Context-Aware Single-Cell Spatial Transcriptomics Prediction from Histology Images." *arXiv.org* (2026). [DOI](https://doi.org/10.48550/arXiv.2609.36429)
 6. Li-Ying Chen, Zhong-Min Zhang, B. Wang, Wen-Le Ren, Hong-Ke Peng, Shi-Hong Lu, Meng-Yuan Xu, Yun-He Zhou, Xiong-Jian Luo, Tong Ye, Qi Zhu, Feng Yan, and Lu-Yi Tian "MINT infers the latent single-cell spatial transcriptome from paired histology." *bioRxiv* (2026). [DOI](https://doi.org/10.64898/2026.09.16.751717)
@@ -73,10 +73,11 @@ Please adjust the paths in your config files accordingly.
 11. Ning-Hui Hao, Xinxing Yang, Bo-Shen Yan, Dong Li, Jun-Zhou Huang, Xin-Tao Wu, E. S. Ruiz, A. R. D. de Luzuriaga, Chen Zhao, and Gui-Hong Wan "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models." *arXiv.org* (2026). [DOI](https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a)
 <!-- CITATIONS:END -->
 
-*This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/) and [OpenCitations](https://opencitations.net/) APIs.*
+*This list is automatically updated weekly via [GitHub Actions](.github/workflows/update-citations.yml) using the [Semantic Scholar](https://www.semanticscholar.org/), [OpenAlex](https://openalex.org/) and [OpenCitations](https://opencitations.net/) APIs.*
 
 ## Related Projects
 
+- [DeepSpot-M](https://github.com/ratschlab/DeepSpotM) — Multimodal foundation model for transcriptome-wide virtual spatial transcriptomics from H&E images. Represents genes as queryable embeddings, so it spans the protein-coding transcriptome including genes unseen during training.
 - [DeepSpot](https://github.com/ratschlab/DeepSpot) — Predicts spatial transcriptomics from H&E images at spot-level (Visium) and single-cell (Xenium) resolution. Includes 8 TB of predicted TCGA data.
 - [AESTETIK](https://github.com/ratschlab/aestetik) — AutoEncoder for learning multi-modal spatial transcriptomics representations.
 

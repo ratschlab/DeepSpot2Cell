@@ -1,0 +1,90 @@
+[
+  {
+    "title": "STMoE: Multi-Scale Mixture-of-Experts for Single-Cell Gene Expression Prediction from Histology",
+    "authors": "Xi Li, Ya-Qi Hu, Zi-Heng Duan, Chao-Yang Wang, and Jing Zhang",
+    "venue": "Proceedings of the 35th ACM International Conference on Information and Knowledge Management",
+    "year": 2026,
+    "link": "https://doi.org/10.1145/3799682.3841080",
+    "date": "2026-11-06"
+  },
+  {
+    "title": "CellPlex: Benchmarking Single-Cell Spatial Proteomics Prediction from H&E",
+    "authors": "Zi-Jun Gao, Yi-Jiang Chen, Xiang-De Luo, and Pheng-Ann Heng",
+    "venue": "",
+    "year": 2026,
+    "link": "https://www.semanticscholar.org/paper/920a40bf247e53248537f1c704490a4ca9b01482",
+    "date": "2026-11-02"
+  },
+  {
+    "title": "From WSIs to Bulk, Spatial and Single-Cell Transcriptomics via Multi-Scale Graph Neural Networks",
+    "authors": "Miguel Andrade, José A. Almeida, Carlos Santiago, and Catarina Barata",
+    "venue": "arXiv",
+    "year": 2026,
+    "link": "https://doi.org/10.48550/arxiv.2610.41692",
+    "date": "2026-10-30"
+  },
+  {
+    "title": "Probabilistic uncertainty in virtual spatial transcriptomics from histology is largely redundant with the predicted mean",
+    "authors": "Thomas Batique, Kalin Nonchev, V. Koelzer, and G. Rätsch",
+    "venue": "bioRxiv",
+    "year": 2026,
+    "link": "https://doi.org/10.64898/2026.10.23.760875",
+    "date": "2026-10-24"
+  },
+  {
+    "title": "Towards Scalable Context-Aware Single-Cell Spatial Transcriptomics Prediction from Histology Images",
+    "authors": "Zi-Jun Gao, Chun-Bin Gu, Jin-Xi Xiang, Xiang-De Luo, and Pheng-Ann Heng",
+    "venue": "arXiv.org",
+    "year": 2026,
+    "link": "https://doi.org/10.48550/arXiv.2609.36429",
+    "date": "2026-09-29"
+  },
+  {
+    "title": "MINT infers the latent single-cell spatial transcriptome from paired histology",
+    "authors": "Li-Ying Chen, Zhong-Min Zhang, B. Wang, Wen-Le Ren, Hong-Ke Peng, Shi-Hong Lu, Meng-Yuan Xu, Yun-He Zhou, Xiong-Jian Luo, Tong Ye, Qi Zhu, Feng Yan, and Lu-Yi Tian",
+    "venue": "bioRxiv",
+    "year": 2026,
+    "link": "https://doi.org/10.64898/2026.09.16.751717",
+    "date": "2026-09-22"
+  },
+  {
+    "title": "VOICE: A Vision-Omics Foundation Model Integrating Direct and Retrieval-Based Prediction of In-situ Single-Cell Gene Expression",
+    "authors": "Xin Luo, Yi-Cheng Tao, Hao-Xuan Zeng, Su-Yuan Wang, Chen-Zi Ouyang, Meiqing Zhu, Kai Liu, Shui-Bing Chen, and Jie Liu",
+    "venue": "arXiv.org",
+    "year": 2026,
+    "link": "https://doi.org/10.48550/arXiv.2608.08366",
+    "date": "2026-08-08"
+  },
+  {
+    "title": "AI for Precision Medicine: Histopathology-centered Computational Analysis of Spatial Omics: Integration, Mapping, and Foundation Models",
+    "authors": "Ning-Hui Hao, Bo-Shen Yan, Dong Li, Xin-Tao Wu, Chen Zhao, and Gui-Hong Wan",
+    "venue": "Knowledge Discovery and Data Mining",
+    "year": 2026,
+    "link": "https://doi.org/10.1145/3770855.3816454",
+    "date": "2026-08-08"
+  },
+  {
+    "title": "Artificial Intelligence for Molecular Biomarker Identification in Gastrointestinal and Hepatobiliary Cancers",
+    "authors": "Hyun-jong Jang, Kwangil Yim, and Sung-Hak Lee",
+    "venue": "International Journal of Molecular Sciences",
+    "year": 2026,
+    "link": "https://doi.org/10.3390/ijms27156969",
+    "date": "2026-08-01"
+  },
+  {
+    "title": "Histopathology-centered computational evolution of spatial omics: integration, mapping, and foundation models",
+    "authors": "Ning-Hui Hao, Xin-Xing Yang, Bo-Shen Yan, Dong Li, Jun-Zhou Huang, Xin-Tao Wu, E. S. Ruiz, Arlene M. Ruiz de Luzuriaga, Chen Zhao, and Gui-Hong Wan",
+    "venue": "Briefings in Bioinformatics",
+    "year": 2026,
+    "link": "https://doi.org/10.1093/bib/bbag387",
+    "date": "2026-07-01"
+  },
+  {
+    "title": "Histopathology-centered Computational Evolution of Spatial Omics: Integration, Mapping, and Foundation Models",
+    "authors": "Ning-Hui Hao, Xinxing Yang, Bo-Shen Yan, Dong Li, Jun-Zhou Huang, Xin-Tao Wu, E. S. Ruiz, A. R. D. de Luzuriaga, Chen Zhao, and Gui-Hong Wan",
+    "venue": "arXiv.org",
+    "year": 2026,
+    "link": "https://www.semanticscholar.org/paper/ab1a5c1f63e9af7d8a5576f25debcb69f3b3021a",
+    "date": ""
+  }
+]
